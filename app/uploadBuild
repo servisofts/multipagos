@@ -1,0 +1,1 @@
+scp -r build/ 10:/home/servisofts/servicios/sqr/entornos/sqr/

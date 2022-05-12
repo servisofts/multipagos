@@ -1,0 +1,39 @@
+{
+    "ss": "servisofts.multipagos",
+    "socket_client": {
+        "servicio": {
+            "puerto": 10001,
+            "ip": "servicio.ss.lo",
+            "cert": {
+                "OU": "servicio",
+                "pem": "servicio.pem"
+            }
+        },
+        "reconectTime": 5000
+    },
+    "files": {
+        "url": "/u01/servisoftsFiles/multipagos/",
+        "url_gpx": "/u01/servisoftsFiles/multipagos/gpx/"
+    },
+    "data_base": {
+        "puerto": 5432,
+        "pass": "postgres",
+        "ip": "192.168.5.35",
+        "bd_name": "servisofts.multipagos",
+        "user": "postgres"
+    },
+    "nombre": "multipagos",
+    "ssl": {
+        "pass_jks": "Servisofts123.",
+        "cert": {
+            "ST": "Av Banzer",
+            "C": "BO",
+            "E": "ricky.paz.d.97@gmail.com",
+            "OU": "multipagos",
+            "CN": "multipagos.servisofts.com",
+            "L": "Santa Cruz",
+            "O": "Servisofts SRL"
+        },
+        "nombre_jks": "servisofts"
+    }
+}
