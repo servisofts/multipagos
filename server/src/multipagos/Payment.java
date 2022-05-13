@@ -68,9 +68,10 @@ public class Payment {
 
         }
         if (paymentType != null) {
+            paymentType.setPaymentData(paymentData);
             return paymentType.send();
         }
-       throw new Exception("Error desconocido on pay_method");
+        throw new Exception("Error desconocido on pay_method");
     }
 
     public Multipagos getMultipagos() {

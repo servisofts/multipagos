@@ -111,7 +111,10 @@ public class Order {
                 new JSONObject().put("pay_channel_code", payType)));
         obj.put("client", order_data.getJSONObject("client"));
         // obj.put("url_confirm", "https://tapekeapp.com/api/");
+        
         JSONObject data = Http.send(this.url + "api/v2/external_services/create_payorder_app", obj, this.Bearer);
+        System.out.println(obj);
+        System.out.println(data);
         // JSONObject data = Http.send(this.url + "api/v2/external_services/payorders",
         // obj, this.Bearer);
         if (data.has("status")) {

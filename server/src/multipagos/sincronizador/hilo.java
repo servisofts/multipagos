@@ -35,7 +35,7 @@ public class hilo extends Thread {
     public void sincronizarEstados() {
         try {
             JSONArray arr = SPGConect.ejecutarConsultaArray(
-                    "select array_to_json(array_agg(sq1.*)) as json from (select * from payment_order where state NOT IN ('terminated') and estado = 1) sq1");
+                    "select array_to_json(array_agg(sq1.*)) as json from (select * from payment_order where state NOT IN ('terminated', 'no_pay_method') and estado = 1) sq1");
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
                 new POS(obj).sincronize();

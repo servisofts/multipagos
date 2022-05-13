@@ -9,7 +9,8 @@ public abstract class POS_state implements IPOS {
         pending,
         expiration_date_timeout,
         terminated,
-        confirmada
+        confirmada,
+        no_pay_method
     }
 
     public static POS_state getState(POS obj, POS_types type) {
@@ -24,6 +25,8 @@ public abstract class POS_state implements IPOS {
                 return new terminated(obj);
             case confirmada:
                 return new confirmada(obj);
+            case no_pay_method:
+                return new no_pay_method(obj);
             default:
                 return new not_register(obj);
         }

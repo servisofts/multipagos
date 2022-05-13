@@ -18,4 +18,9 @@ public class PTEfectivo extends PaymentType {
     public JSONObject toJson() {
         return super.toJson().put("extraData", new JSONObject());
     }
+    @Override
+    public JSONObject onSucces(JSONObject response) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

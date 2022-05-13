@@ -33,10 +33,11 @@ public class not_register extends POS_state {
             throw new Exception("No se pudo crear la orden de pago");
         }
 
-        // String state = orden.getJSONObject("pay_order").getJSONObject("status").getString("name");
+        // String state =
+        // orden.getJSONObject("pay_order").getJSONObject("status").getString("name");
 
         // // if (state.equals("Pediente")) {
-        // //     pay_order.put("state", "pending");
+        // // pay_order.put("state", "pending");
         // // }
 
         pay_order.put("pay_order_number", orden.getJSONObject("pay_order").getInt("pay_order_number") + "");
@@ -44,8 +45,8 @@ public class not_register extends POS_state {
         orden.getJSONObject("pay_order").remove("status");
         pay_order.put("data", orden);
         SPGConect.insertObject("payment_order", pay_order);
-        this.pos.changeState(POS_types.pending, "register");
-        
+        this.pos.changeState(POS_types.no_pay_method, "register");
+
         this.pos.setData(pay_order);
 
     }

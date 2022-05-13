@@ -9,6 +9,7 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -44,12 +45,9 @@ public class Http {
             }
             br.close();
             return new JSONObject(resp);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } 
         return null;
     }
 

@@ -20,17 +20,12 @@ public class pending extends POS_state {
 
     @Override
     public void sincronize() {
-        if (!this.pos.getData().has("expiration_date")) {
-            return;
-        }
-        if (this.pos.getData().isNull("expiration_date")) {
-            return;
-        }
-        String expiration_date = this.pos.getData().getString("expiration_date");
-        if (expiration_date.length() <= 0) {
-            return;
-        }
+
         try {
+    
+
+            System.out.println("Sincronizando orden de pago" + this.pos.getData().getString("pay_order_number"));
+            // System.out.println(this.pos.getData());
             JSONObject obj_sinc = new JSONObject();
             obj_sinc.put("data", this.pos.getData());
             obj_sinc.put("servicio", new JSONObject().put("key", this.pos.getData().getString("key_servicio")));
@@ -47,6 +42,16 @@ public class pending extends POS_state {
                 return;
             }
 
+            if (!this.pos.getData().has("expiration_date")) {
+                return;
+            }
+            if (this.pos.getData().isNull("expiration_date")) {
+                return;
+            }
+            String expiration_date = this.pos.getData().getString("expiration_date");
+            if (expiration_date.length() <= 0) {
+                return;
+            }
             Date fecha_d = SUtil.parseTimestamp(expiration_date);
             if (fecha_d.compareTo(new Date()) < 0) {
                 this.pos.changeState(POS_types.expiration_date_timeout, "sincronize");

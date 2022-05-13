@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import multipagos.Payment;
 import multipagos.http.Http;
+import payment_order_state.POS;
 
 public abstract class PaymentType {
     private String businessName;
@@ -19,6 +20,8 @@ public abstract class PaymentType {
     private String totalAmmount;
     private String payChanelCode;
     private Payment payment;
+
+    private JSONObject paymentData;
 
     public PaymentType(Payment payment, String document, String email, String firstName, String lastName, String gloss,
             String nit,
@@ -53,6 +56,22 @@ public abstract class PaymentType {
         return obj;
     }
 
+    public void setPaymentData(JSONObject paymentData) {
+        this.paymentData = paymentData;
+    }
+
+    public JSONObject getPaymentData() {
+        return paymentData;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+    public String getPayOrderNumber() {
+        return payOrderNumber;
+    }
+    public abstract JSONObject onSucces(JSONObject response);
+
     public JSONObject send() throws JSONException, Exception {
         if (!payment.isLogin()) {
             payment.login();
@@ -60,13 +79,12 @@ public abstract class PaymentType {
         JSONObject obj = this.toJson();
 
         JSONObject data = Http.send(payment.getUrl() + "api/v1/pay", obj, payment.getBearer());
+        System.out.println(obj);
+        System.out.println(data);
         if (data.has("status")) {
             if (data.getInt("status") == 200) {
                 if (data.getString("statusCode").equals("10000")) {
-                    if (payChanelCode.equals("tigo_money")) {
-                        payment.getMultipagos().getOrden().confirm(this.payOrderNumber);
-                    }
-                    return data.getJSONObject("data");
+                    return this.onSucces(data);
                 } else {
                     throw new Exception(data.getString("message"));
                 }

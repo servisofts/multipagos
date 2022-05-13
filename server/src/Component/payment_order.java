@@ -14,6 +14,7 @@ import Servisofts.SPGConect;
 import Servisofts.SUtil;
 import multipagos.Multipagos;
 import payment_order_state.POS;
+import payment_order_state.POS_state.POS_types;
 
 public class payment_order {
     public static final String COMPONENT = "payment_order";
@@ -214,6 +215,7 @@ public class payment_order {
         pay_order_edit.put("key", pay_order.getString("key"));
         pay_order_edit.put("expiration_date", expiration_date);
         SPGConect.editObject("payment_order", pay_order_edit);
+      
         obj.put("data", pt);
         obj.put("estado", "exito");
     }

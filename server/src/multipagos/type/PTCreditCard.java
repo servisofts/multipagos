@@ -22,4 +22,10 @@ public class PTCreditCard extends PaymentType {
         JSONArray extraData = new JSONArray();
         return super.toJson().put("componentData", componentData).put("extraData", extraData);
     }
+
+    @Override
+    public JSONObject onSucces(JSONObject response) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
